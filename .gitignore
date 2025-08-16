@@ -35,6 +35,9 @@ ScaffoldingReadMe.txt
 *.nupkg
 # NuGet Symbol Packages
 *.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
 
 # Others
 ~$*
@@ -52,3 +55,32 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# VS files
+.vs/
+Generated_Code/
+
+# macOS system files
+.DS_Store
+
+# Dotnet CLI
+*.dbmdl
+*.log
+*.vspscc
