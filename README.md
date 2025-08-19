@@ -71,11 +71,13 @@ Injector
 ## 📋 Input and Output
 
 **Controls**
-- `↑` Up  
-- `↓` Down  
-- `←` Left  
-- `→` Right  
+- `↑` Up
+- `↓` Down
+- `←` Left
+- `→` Right
+
 <br>
+
 - `↵ Enter` Restart game
 - `␣ Space` Exit game
 
