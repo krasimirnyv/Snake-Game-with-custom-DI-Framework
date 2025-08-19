@@ -16,6 +16,7 @@ You can view the source code for this project here:
 
 - **Game entry**: [`SnakeGame.cs`](SnakeGame/SnakeGame/SnakeGame.cs)
 - **Engine**: [`Engine.cs`](SnakeGame/SnakeGame/Core/Engine.cs)
+- **Renderer**: [`ConsoleRenderer.cs`](SnakeGame/SnakeGame/IO/ConsoleRenderer.cs)
 - **Custom DI**: [`DependencyProvider.cs`](SnakeGame/EasyInjector/DependencyProvider.cs), [`Injector.cs`](SnakeGame/EasyInjector/Injector.cs)
 
 ---
@@ -31,6 +32,7 @@ You can view the source code for this project here:
 - Player-controlled snake (arrow keys).
 - Randomly spawning food with different point values.
 - Collision detection (walls & self).
+- Ability for the player to restart or quit after the game ends.
 - Live score and persistent **High Score** (JSON storage).
 
 ---
@@ -53,7 +55,7 @@ You can view the source code for this project here:
 - Safe, atomic writes (temporary file + replace), thread-safe `lock`, and in-memory cache.
 - Class: `HighScoreService` (uses injected `IDateTimeProvider`).
 
-### DI Integration in `Program`
+### DI Integration in `Program.cs`
 ```csharp
 // SnakeGame/SnakeGame.cs
 Injector
@@ -86,23 +88,23 @@ Injector
 
 ## 📊 Solution Design
 
-| Component                                | Responsibility |
-|------------------------------------------|----------------|
-| `Core/Engine.cs`                         | Main game loop (update & render), score, collisions |
-| `Models/Snake.cs`                        | Snake body, movement, growth |
-| `Models/Food*.cs` (`Star`, `Sun`, `Asterisk`) | Food variants with points & glyphs |
-| `IO/ConsoleRenderer.cs`                  | Drawing walls, snake, food, score |
-| `IO/ConsoleGameInput.cs`                 | Non-blocking key input → `Direction` |
-| `Utility/HighScoreService.cs`            | Load/Save persistent high score (JSON) |
-| `Utility/RandomGenerator.cs`             | Random numbers for food placement |
-| `Contracts/*.cs`                         | `IRenderer`, `IGameInput`, `IRandomGenerator`, `IDateTimeProvider` |
-| **DI**: `CustomDIFramework/*`            | EasyInjector (container, API, attributes, messages) |
+| Component                                     | Responsibility                                                     |
+|-----------------------------------------------|--------------------------------------------------------------------|
+| `Core/Engine.cs`                              | Main game loop (update & render), score, collisions                |
+| `Models/Snake.cs`                             | Snake body, movement, growth                                       |
+| `Models/Food*.cs` (`Star`, `Sun`, `Asterisk`) | Food variants with points & glyphs                                 |
+| `IO/ConsoleRenderer.cs`                       | Drawing walls, snake, food, score, messages                        |
+| `IO/ConsoleGameInput.cs`                      | Non-blocking key input → `Direction`                               |
+| `Utility/HighScoreService.cs`                 | Load/Save persistent high score (JSON)                             |
+| `Utility/RandomGenerator.cs`                  | Random numbers for food placement ans food variants                |
+| `Contracts/*.cs`                              | `IRenderer`, `IGameInput`, `IRandomGenerator`, `IDateTimeProvider` |
+| **DI**: `CustomDIFramework/*`                 | EasyInjector (container, API, attributes, messages)                |
 
 ---
 
 ## 🔧 Custom DI Framework (EasyInjector)
 
-A lightweight DI container implemented from scratch in **`CustomDIFramework`**:
+A lightweight DI framework implemented from scratch in **`EasyInjector`**, designed to be reusable and easily integrated into future projects beyond the Snake Game.
 
 ### Main Types
 - **`DependencyProvider`**: the container holding registrations & creating instances.
@@ -128,16 +130,17 @@ provider.Register(typeof(IService), new Service());
 provider.Register(typeof(IService), (Func<DependencyProvider, object>)(p => new Service()));
 ```
 
+
 ### Resolution & Object Graph Creation
 - **Constructor injection** with **exactly one** public instance constructor:
-    - The container inspects the single public ctor, resolves its parameters, and calls it.
+    - The container inspects the single public constructor, resolves its parameters, and calls it.
     - Each parameter must be **registered**; otherwise throws a clear exception.
 - **Field injection** via `[Inject]` on **private instance fields**:
-    - After construction, the container scans non-public instance fields, finds those with `[Inject]`, resolves them, and sets values via reflection.
+    - After construction, the container scans non-public, non-static instance fields, finds those with `[Inject]`, resolves them, and sets values via reflection.
 - **Interfaces**:
     - `Create<T>()` / `Create(Type)`:
         - If `T` is an **interface**, the container **must** have a registration and returns the resolved dependency.
-        - If `T` is a **class**, it must have **exactly one** public ctor; DI resolves its parameters recursively.
+        - If `T` is a **class**, it must have **exactly one** public constructor; DI resolves its parameters recursively.
 
 **Snippet from usage:**
 ```csharp
@@ -169,7 +172,7 @@ engine.Run();
 - No scopes / disposal / decorators.
 - No cyclic dependency detection (would cause recursion issues).
 - One public constructor rule (keeps resolution deterministic & simple).
-- Field injection supports **instance private** fields only (no static / properties).
+- Field injection supports **instance private** fields only (no static | no properties).
 
 ---
 
@@ -235,8 +238,18 @@ dotnet run --project SnakeGame/SnakeGame.csproj
 ## 🎮 Gameplay Preview
 
 <p align="center">
-  <img src="SnakeGame/SnakeGame/Screenshot-gameplay.jpg" width="500px" alt="Snake Game Console Screenshot">
+  <img src="SnakeGame/SnakeGame/Images/Screenshot-gameplay.jpg" width="500px" alt="Snake Game Console Screenshot">
 </p>
+
+---
+
+## 🚀 Try the Demo
+
+You can play the game directly in your web browser here (it doesn't contain the DI container):
+
+<a href="https://replit.com/join/zhsrwocelv-krasimirnyv" target="_blank">
+  <img src="SnakeGame/SnakeGame/Images/Play.png" width="100" alt="Play Button">
+</a>
 
 ---
 
