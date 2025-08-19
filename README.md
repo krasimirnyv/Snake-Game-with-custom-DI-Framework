@@ -14,9 +14,9 @@ Project: **Snake Game with Custom Dependency Injection Framework** is a console-
 
 You can view the source code for this project here:
 
-- **Game entry**: [`SnakeGame.cs`](SnakeGame/SnakeGame.cs)
-- **Engine**: [`Engine.cs`](SnakeGame/Core/Engine.cs)
-- **Custom DI**: [`DependencyProvider.cs`](CustomDIFramework/DependencyProvider.cs), [`Injector.cs`](CustomDIFramework/Injector.cs)
+- **Game entry**: [`SnakeGame.cs`](SnakeGame/SnakeGame/SnakeGame.cs)
+- **Engine**: [`Engine.cs`](SnakeGame/SnakeGame/Core/Engine.cs)
+- **Custom DI**: [`DependencyProvider.cs`](SnakeGame/EasyInjector/DependencyProvider.cs), [`Injector.cs`](SnakeGame/EasyInjector/Injector.cs)
 
 ---
 
@@ -187,7 +187,6 @@ graph TD
     IRandomGenerator --> RandomGenerator
     IDateTimeProvider --> SystemDateTimeProvider
 ```
-
 ---
 
 ## 🛠️ Technologies Used
@@ -233,13 +232,13 @@ dotnet build
 dotnet run --project SnakeGame/SnakeGame.csproj
 ```
 
----
-
 ## 🎮 Gameplay Preview
 
 <p align="center">
   <img src="SnakeGame/SnakeGame/Screenshot-gameplay.jpg" width="500px" alt="Snake Game Console Screenshot">
 </p>
+
+---
 
 ## 🧪 Notes & Tips
 
