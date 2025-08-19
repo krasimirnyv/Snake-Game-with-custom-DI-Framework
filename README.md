@@ -199,15 +199,47 @@ graph TD
 
 ---
 
+## ⚙️ Prerequisites
+
+To run the project locally, you need:
+
+- [.NET SDK 8.0 or later](https://dotnet.microsoft.com/en-us/download)
+- Git (to clone the repository)
+
+Verify installation:
+
+```bash
+
+dotnet --version
+git --version
+```
+
+## 📥 Clone Repository
+
+Clone the project locally:
+
+```bash
+
+git clone https://github.com/krasimirnyv/Snake-Game-with-custom-DI-Framework.git
+cd Snake-Game-with-custom-DI-Framework
+```
+
 ## ▶️ Getting Started
 
 ```bash
+
 # from repository root
 dotnet build
 dotnet run --project SnakeGame/SnakeGame.csproj
 ```
 
 ---
+
+## 🎮 Gameplay Preview
+
+<p align="center">
+  <img src="SnakeGame/SnakeGame/Screenshot-gameplay.jpg" width="500px" alt="Snake Game Console Screenshot">
+</p>
 
 ## 🧪 Notes & Tips
 
