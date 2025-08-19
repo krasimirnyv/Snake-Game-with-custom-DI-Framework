@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeGame", "SnakeGame\SnakeGame.csproj", "{EAD330A0-1C8F-4479-89D8-59D309623658}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyInjector", "EasyInjector\EasyInjector.csproj", "{2F4E8DFC-14C5-4241-B1CF-21A07F5B73FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAD330A0-1C8F-4479-89D8-59D309623658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD330A0-1C8F-4479-89D8-59D309623658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD330A0-1C8F-4479-89D8-59D309623658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD330A0-1C8F-4479-89D8-59D309623658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F4E8DFC-14C5-4241-B1CF-21A07F5B73FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F4E8DFC-14C5-4241-B1CF-21A07F5B73FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F4E8DFC-14C5-4241-B1CF-21A07F5B73FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F4E8DFC-14C5-4241-B1CF-21A07F5B73FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
